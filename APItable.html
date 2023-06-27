@@ -1,0 +1,64 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<style>
+    table,th,td{
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th,td{
+        padding: 15px;
+        text-align: left;
+    }
+</style>
+<body>
+        <table class="table table-borderd " id="table">
+        </table>
+    <button id="b1">click me</button>
+
+        <script>
+        $(document).ready(function(){
+            $("#b1").click(function(){
+                $.get('https://ppvj.pythonanywhere.com/product/', function(data,status){
+                   for( var ary of data ){
+                   var headerRow ='<tr>';
+                    var headers=Object.keys(ary);
+                    var headerRow = headerRow+'<tr>';
+                        for(var i=0; i<=headers.length; i++){
+                            headerRow +='<th>'+headers[i]+'</th>'
+                        }
+                        headerRow= headerRow+'</tr>'
+                   }
+                   for( var ary of data ){
+                    var headers=Object.values(ary);
+                    var headerRow = headerRow+'<tr>';
+                        for(var i=0; i<headers.length; i++){
+                            headerRow +='<td>'+headers[i]+'</td>'
+                        }
+                        headerRow= headerRow+'</tr>'
+                   }
+                   document.getElementById('table').innerHTML=headerRow
+
+
+
+
+                //    var allrecord;
+                //    for(var k=0; k<ary.length;k++){
+                //     allrecord+='<tr>';
+                //         for(var j=0; j<headers.length; j++)
+                //         {
+                //             var header=header[j];
+                //             allrecord+='<td>'+ary[k][header]+'</td>'
+                //         }
+                //         allrecord+='</tr>';
+                //    }
+                   var table=document.getElementById('table');
+                   table.innerHTML=headerRow;
+                });
+            })
+        })
+        </script>
+    
+</body>
+</html>
